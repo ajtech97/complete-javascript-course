@@ -9,7 +9,7 @@
   <style>
     body {
       height: 100vh;
-      display: flex;
+      /* display: flex; */
       align-items: center;
       background: linear-gradient(to top left, #28b487, #7dd56f);
     }
@@ -23,14 +23,47 @@
       text-align: center;
       color: white;
     }
+
+    div {
+      min-width: 100px;
+      min-height: 100px;
+      border: solid 1px;
+      padding: 30px;
+    }
   </style>
 </head>
 
 <body>
   <h1>JavaScript Fundamentals – Part 1</h1>
+  <button id="clickMe">Click Me</button>
+  <input type="text" onkeyup="betterFunction()">
+
+  <div id="grandparent">
+    <div id="parent">
+      <div id="child">
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <ul id="category">
+    <li id="laptop">Laptop</li>
+    <li id="camera">Camera</li>
+    <li id="shoes">Shoes</li>
+  </ul>
+
+  <div id="form">
+    <input type="text" id="name" data-uppercase>
+    <input type="text" id="pan" data-uppercase>
+    <input type="text" id="mobile" data-uppercase>
+  </div>
+
 
   <!-- <script src="script.js"></script> -->
-  <script src="mine.js"></script>
+  <script src="theory.js"></script>
+  <!-- <script src="program.js"></script> -->
 </body>
 
 </html>
