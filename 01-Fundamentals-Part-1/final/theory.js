@@ -558,35 +558,110 @@
 
 // Event bubbling, capturing/trickling
 
-document.querySelector("#grandparent").addEventListener("click", (e) => {
-    console.log("Grandparent clicked")
-    e.stopPropagation()
-}, false)
+// document.querySelector("#grandparent").addEventListener("click", (e) => {
+//     console.log("Grandparent clicked")
+//     e.stopPropagation()
+// }, false)
 
-document.querySelector("#parent").addEventListener("click", (e) => {
-    console.log("Parent clicked")
-    e.stopPropagation()
-}, false)
+// document.querySelector("#parent").addEventListener("click", (e) => {
+//     console.log("Parent clicked")
+//     e.stopPropagation()
+// }, false)
 
-document.querySelector("#child").addEventListener("click", (e) => {
-    console.log("Child clicked")
-    e.stopPropagation()
-}, false)
-
-
-// Event delegation
-
-document.querySelector("#category").addEventListener("click", (e) => {
-    console.log(e)
-    if (e.target.nodeName === "LI") {
-        window.location.href = "/" + e.target.id
-    }
-})
+// document.querySelector("#child").addEventListener("click", (e) => {
+//     console.log("Child clicked")
+//     e.stopPropagation()
+// }, false)
 
 
-document.querySelector("#form").addEventListener("keyup", (e) => {
-    console.log(e)
-    if (e.target.dataset.uppercase !== undefined) {
-        e.target.value = e.target.value.toUpperCase()
-    }
-})
+// // Event delegation
+
+// document.querySelector("#category").addEventListener("click", (e) => {
+//     console.log(e)
+//     if (e.target.nodeName === "LI") {
+//         window.location.href = "/" + e.target.id
+//     }
+// })
+
+
+// document.querySelector("#form").addEventListener("keyup", (e) => {
+//     console.log(e)
+//     if (e.target.dataset.uppercase !== undefined) {
+//         e.target.value = e.target.value.toUpperCase()
+//     }
+// })
+
+
+
+
+
+
+// Promise
+
+const cart = ["Shoes", "Pants", "Kurta"]
+
+createOrder(cart)
+    .then((orderId) => {
+        console.log(`Order created with order id: ${orderId}`)
+        return orderId
+    })
+    .then((orderId) => proceedToPayment(orderId))
+    .then(({ message, amt }) => {
+        console.log(`${message} of ${amt}`)
+        return showOrderSummary(message, amt)
+    })
+    .then(({ message, amt }) => {
+        console.log(message)
+        console.log('Your wallet has beed debited by:', amt);
+    })
+    .catch((err) => console.log(err.message))
+    .then(() => console.log('No matter what happens, I will get executed'))
+
+
+
+function createOrder(cart) {
+    const pr = new Promise((resolve, reject) => {
+        //create order
+        //validate cart
+        //orderId
+        if (!validateCart(cart)) {
+            const err = new Error("Cart is not valid")
+            reject(err)
+        }
+        //logic for createOrder
+        const orderId = "12345"
+        if (orderId) {
+            setTimeout(() => {
+                resolve(orderId)
+            }, 5000)
+        }
+    })
+    return pr
+}
+
+function proceedToPayment(orderId) {
+    // Logic for handling payment.
+    // This function returns a promise
+    return new Promise((resolve, reject) => {
+        //logic
+        resolve({ message: `Payment successfull for order id:${orderId}`, amt: 2500 })
+        reject(new Error("Please check the order"))
+    })
+}
+
+function showOrderSummary(paymentInfo, amt) {
+    return new Promise((resolve, reject) => {
+        // console.log(amt);
+        if (amt >= 2000) {
+            resolve({ message: `You have ordered items that cost ${amt} RS`, amt: amt });
+        } else {
+            reject(new Error('Please buy more for discount'));
+        }
+    })
+}
+
+function validateCart(cart) {
+    // code to validate cart
+    return true
+}
+
