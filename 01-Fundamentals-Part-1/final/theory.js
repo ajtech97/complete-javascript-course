@@ -598,70 +598,135 @@
 
 // Promise
 
-const cart = ["Shoes", "Pants", "Kurta"]
+// const cart = ["Shoes", "Pants", "Kurta"]
 
-createOrder(cart)
-    .then((orderId) => {
-        console.log(`Order created with order id: ${orderId}`)
-        return orderId
-    })
-    .then((orderId) => proceedToPayment(orderId))
-    .then(({ message, amt }) => {
-        console.log(`${message} of ${amt}`)
-        return showOrderSummary(message, amt)
-    })
-    .then(({ message, amt }) => {
-        console.log(message)
-        console.log('Your wallet has beed debited by:', amt);
-    })
-    .catch((err) => console.log(err.message))
-    .then(() => console.log('No matter what happens, I will get executed'))
+// createOrder(cart)
+//     .then((orderId) => {
+//         console.log(`Order created with order id: ${orderId}`)
+//         return orderId
+//     })
+//     .then((orderId) => proceedToPayment(orderId))
+//     .then(({ message, amt }) => {
+//         console.log(`${message} of ${amt}`)
+//         return showOrderSummary(message, amt)
+//     })
+//     .then(({ message, amt }) => {
+//         console.log(message)
+//         console.log('Your wallet has beed debited by:', amt);
+//     })
+//     .catch((err) => console.log(err.message))
+//     .then(() => console.log('No matter what happens, I will get executed'))
 
 
 
-function createOrder(cart) {
-    const pr = new Promise((resolve, reject) => {
-        //create order
-        //validate cart
-        //orderId
-        if (!validateCart(cart)) {
-            const err = new Error("Cart is not valid")
-            reject(err)
-        }
-        //logic for createOrder
-        const orderId = "12345"
-        if (orderId) {
-            setTimeout(() => {
-                resolve(orderId)
-            }, 5000)
-        }
-    })
-    return pr
-}
+// function createOrder(cart) {
+//     const pr = new Promise((resolve, reject) => {
+//         //create order
+//         //validate cart
+//         //orderId
+//         if (!validateCart(cart)) {
+//             const err = new Error("Cart is not valid")
+//             reject(err)
+//         }
+//         //logic for createOrder
+//         const orderId = "12345"
+//         if (orderId) {
+//             setTimeout(() => {
+//                 resolve(orderId)
+//             }, 5000)
+//         }
+//     })
+//     return pr
+// }
 
-function proceedToPayment(orderId) {
-    // Logic for handling payment.
-    // This function returns a promise
-    return new Promise((resolve, reject) => {
-        //logic
-        resolve({ message: `Payment successfull for order id:${orderId}`, amt: 2500 })
-        reject(new Error("Please check the order"))
-    })
-}
+// function proceedToPayment(orderId) {
+//     // Logic for handling payment.
+//     // This function returns a promise
+//     return new Promise((resolve, reject) => {
+//         //logic
+//         resolve({ message: `Payment successfull for order id:${orderId}`, amt: 2500 })
+//         reject(new Error("Please check the order"))
+//     })
+// }
 
-function showOrderSummary(paymentInfo, amt) {
-    return new Promise((resolve, reject) => {
-        // console.log(amt);
-        if (amt >= 2000) {
-            resolve({ message: `You have ordered items that cost ${amt} RS`, amt: amt });
-        } else {
-            reject(new Error('Please buy more for discount'));
-        }
-    })
-}
+// function showOrderSummary(paymentInfo, amt) {
+//     return new Promise((resolve, reject) => {
+//         // console.log(amt);
+//         if (amt >= 2000) {
+//             resolve({ message: `You have ordered items that cost ${amt} RS`, amt: amt });
+//         } else {
+//             reject(new Error('Please buy more for discount'));
+//         }
+//     })
+// }
 
-function validateCart(cart) {
-    // code to validate cart
-    return true
-}
+// function validateCart(cart) {
+//     // code to validate cart
+//     return true
+// }
 
+
+
+
+// Async await
+
+// const p1 = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve("promise resolved")
+//     }, 20000)
+// })
+
+
+// const p2 = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve("promise resolved")
+//     }, 10000)
+// })
+
+// async function getData() {
+//     console.log("Hello")
+
+//     const val = await p1
+//     console.log("JS 1")
+//     console.log(val)
+
+//     const val2 = await p2
+//     console.log("JS 2")
+//     console.log(val2)
+
+//     console.log("Hi")
+// }
+
+// getData()
+
+// console.log("wassup")
+
+
+// fetch 
+
+// const API_URL = "https://jsonplaceholder.typicode.com/users"
+
+// async function handlePromise() {
+//     try {
+//         // way 1
+//         const data = await fetch(API_URL)
+//         const jsonValue = await data.json()
+//         console.log(jsonValue)
+
+//         // way 2
+//         console.log(await (await fetch(API_URL)).json())
+//     } catch (err) {
+//         console.log(err)
+//     }
+// }
+
+// // way 3
+// const handlePromise1 = async () =>
+//     fetch(API_URL)
+//         .then(r => r.json())
+//         .then(console.log)
+//         .catch(console.error)
+
+
+// handlePromise()
+// handlePromise1()
