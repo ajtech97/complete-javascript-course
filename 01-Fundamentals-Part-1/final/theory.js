@@ -735,21 +735,21 @@
 
 // Promise APIs
 
-const p1 = new Promise((resolve, reject) => {
-    setTimeout(() => resolve("p1 success"), 3000)
-})
+// const p1 = new Promise((resolve, reject) => {
+//     setTimeout(() => resolve("p1 success"), 3000)
+// })
 
 
-const p2 = new Promise((resolve, reject) => {
-    setTimeout(() => resolve("p2 success"), 1000)
-    // setTimeout(() => reject("p2 fail"), 1000)
-})
+// const p2 = new Promise((resolve, reject) => {
+//     setTimeout(() => resolve("p2 success"), 1000)
+//     // setTimeout(() => reject("p2 fail"), 1000)
+// })
 
 
-const p3 = new Promise((resolve, reject) => {
-    // setTimeout(() => resolve("p3 success"), 2000)
-    setTimeout(() => reject("p3 fail"), 2000)
-})
+// const p3 = new Promise((resolve, reject) => {
+//     // setTimeout(() => resolve("p3 success"), 2000)
+//     setTimeout(() => reject("p3 fail"), 2000)
+// })
 
 // Promise.all([p1, p2, p3]).then((res) => {
 //     console.log(res)
@@ -775,3 +775,67 @@ const p3 = new Promise((resolve, reject) => {
 // }).catch((err) => {
 //     console.log(err)
 // })
+
+
+
+// this keyword
+
+"use strict"
+
+// this in global spcae
+console.log(this)  // global object - window
+
+// inside a function
+function x() {
+    // value depends on strict non strict mode
+    console.log(this)
+}
+
+// this keyord value depends on how it is called
+x()
+window.x()
+
+// this inside a object's method
+
+const student = {
+    name: "Ajinkya",
+    printName() {
+        console.log(this.name)
+    }
+}
+
+student.printName()
+
+const student2 = {
+    name: "Aj"
+}
+
+// call, appy, bind methods
+student.printName.call(student2)
+
+// arrow function dont provide their own this binding(it retains the this value of the enclosing lexical context)
+
+const obj = {
+    a: 10,
+    x: () => {
+        console.log(this)
+    }
+}
+
+obj.x()
+
+
+
+const obj1 = {
+    a: 10,
+    x() {
+        const y = () => {
+            console.log(this)
+        }
+        y()
+    }
+}
+
+obj1.x()
+
+// this inside DOM elements => reference to HTMLElement
