@@ -780,62 +780,142 @@
 
 // this keyword
 
-"use strict"
+// "use strict"
 
-// this in global spcae
-console.log(this)  // global object - window
+// // this in global spcae
+// console.log(this)  // global object - window
 
-// inside a function
-function x() {
-    // value depends on strict non strict mode
-    console.log(this)
-}
+// // inside a function
+// function x() {
+//     // value depends on strict non strict mode
+//     console.log(this)
+// }
 
-// this keyord value depends on how it is called
-x()
-window.x()
+// // this keyord value depends on how it is called
+// x()
+// window.x()
 
-// this inside a object's method
+// // this inside a object's method
 
-const student = {
-    name: "Ajinkya",
-    printName() {
-        console.log(this.name)
-    }
-}
+// const student = {
+//     name: "Ajinkya",
+//     printName() {
+//         console.log(this.name)
+//     }
+// }
 
-student.printName()
+// student.printName()
 
-const student2 = {
-    name: "Aj"
-}
+// const student2 = {
+//     name: "Aj"
+// }
 
-// call, appy, bind methods
-student.printName.call(student2)
+// // call, appy, bind methods
+// student.printName.call(student2)
 
-// arrow function dont provide their own this binding(it retains the this value of the enclosing lexical context)
+// // arrow function dont provide their own this binding(it retains the this value of the enclosing lexical context)
 
-const obj = {
-    a: 10,
-    x: () => {
-        console.log(this)
-    }
-}
+// const obj = {
+//     a: 10,
+//     x: () => {
+//         console.log(this)
+//     }
+// }
 
-obj.x()
+// obj.x()
 
 
 
-const obj1 = {
-    a: 10,
-    x() {
-        const y = () => {
-            console.log(this)
-        }
-        y()
-    }
-}
+// const obj1 = {
+//     a: 10,
+//     x() {
+//         const y = () => {
+//             console.log(this)
+//         }
+//         y()
+//     }
+// }
 
-obj1.x()
+// obj1.x()
 
 // this inside DOM elements => reference to HTMLElement
+
+
+
+
+
+// Shallow copy deep copy
+
+// It is pointing to a same reference so value changes
+// let obj = {
+//     name: "peter"
+// }
+
+// let user = obj
+// user.name = "Aj"
+
+// console.log(obj)
+
+// To avoid this we have shallow copy and deep copy concepts
+
+// But for variable value is copied not reference
+
+// let x = "Abc"
+// let y = x
+// y = "Aj"
+// console.log(x)
+
+// shallow copy
+// let obj = {
+//     name: "peter"
+// }
+
+// let user = Object.assign({}, obj)
+// user.name = "Aj"
+
+// let user = { ...obj }
+// user.name = "Aj"
+
+// console.log(obj)
+// console.log(user)
+
+
+// Deep copy
+
+// let obj = {
+//     name: "peter",
+//     address: {
+//         city: "Mumbai"
+//     },
+// getData(){
+//     return "All data"
+// }
+// }
+
+// As its nested object inside level is copied by reference
+// let user = { ...obj }
+// user.address.city = "Pune"
+
+// To avaoid this we do deep copy
+// let user = JSON.parse(JSON.stringify(obj))
+// user.address.city = "Pune"
+
+// console.log(obj)
+
+// Now one more issue with deep copy is it dosen't copy function and date 
+// To resolve this we have deepclone library
+
+// let obj = {
+//     name: "peter",
+//     address: {
+//         city: "Mumbai"
+//     },
+//     getData() {
+//         return "All data"
+//     }
+// }
+
+// let user = _.cloneDeep(obj)
+// user.address.city = "Pune"
+// console.log("obj", obj)
+// console.log("user", user)
